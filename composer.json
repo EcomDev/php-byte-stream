@@ -1,0 +1,32 @@
+{
+    "name": "ecomdv/bytes",
+    "description": "Library for writing FMS parsers without allocating too much memory while doing it",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Chepurnyi",
+            "email": "ivan.chepurnyi@ecomdev.org"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "~7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "EcomDev\\Bytes\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EcomDev\\Bytes\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.1"
+    },
+    "scripts": {
+        "test": "phpunit --colors --coverage-text"
+    }
+}
