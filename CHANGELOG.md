@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Bytes and buffer contracts
+- StringBytes implementation
 
 [Unreleased]: https://github.com/ecomdev/php-bytes/compare/4b825dc642cb6eb9a060e54bf8d69288fbee4904...HEAD
 
