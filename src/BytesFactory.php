@@ -15,13 +15,13 @@ use function strlen;
  */
 class BytesFactory
 {
-    public function fromString(string $data): Bytes
+    public function createBytesFromString(string $data): Bytes
     {
         return new StringBytes($data, strlen($data));
     }
 
-    public function emptyBuffer(): Buffer
+    public function createBuffer(): Buffer
     {
-
+        return new EmptyBuffer();
     }
 }

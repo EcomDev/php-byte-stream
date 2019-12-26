@@ -33,6 +33,8 @@ interface Bytes
      * @param int $position
      *
      * @return Bytes
+     * @throws OutOfBoundsException
+     * @throws OutOfRangeException
      */
     public function sliceFrom(int $position): Bytes;
 
@@ -42,8 +44,20 @@ interface Bytes
      * @param int $length
      *
      * @return Bytes
+     * @throws OutOfBoundsException
+     * @throws OutOfRangeException
      */
     public function sliceTo(int $length): Bytes;
+
+    /**
+     * Returns a character at a specified position in the byte slice
+     *
+     * @param int $position
+     * @return string
+     * @throws OutOfBoundsException
+     * @throws OutOfRangeException
+     */
+    public function peek(int $position): string;
 
     /**
      * String representation of current bytes scope

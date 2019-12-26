@@ -12,7 +12,7 @@ namespace EcomDev\Bytes;
  * Bytes buffer
  *
  * Allows to accumulate multiple bytes into single buffer
- * And provides same api for bytes
+ * And provides same api as in bytes
  */
 interface Buffer extends Bytes
 {

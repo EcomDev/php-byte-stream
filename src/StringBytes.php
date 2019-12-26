@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace EcomDev\Bytes;
 
-use OutOfBoundsException;
-use OutOfRangeException;
 use function substr;
 
 /**
@@ -93,11 +91,11 @@ final class StringBytes implements Bytes
         $limit += $offset;
 
         if ($offset < 0 || $limit < 0) {
-            throw new OutOfBoundsException('Slice can only be in positive range');
+            throw OutOfBoundsException::onlyInPositiveRange();
         }
 
         if ($limit > $this->size || $offset > $this->size) {
-            throw new OutOfRangeException('Bytes are shorter then requested slice');
+            throw OutOfRangeException::bytesAreTooShort();
         }
 
         $slice = new self($this->bytes, $this->size);
@@ -115,5 +113,23 @@ final class StringBytes implements Bytes
     public function asString(): string
     {
         return substr($this->bytes, $this->offset, $this->limit - $this->offset);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function peek(int $position): string
+    {
+        if ($position < 0) {
+            throw OutOfBoundsException::positionShouldBeAlwaysPositive();
+        }
+
+        $position += $this->offset;
+
+        if ($position >= $this->limit) {
+            throw OutOfRangeException::requestedPositionNotAvailable();
+        }
+
+        return $this->bytes[$position];
     }
 }
