@@ -33,8 +33,8 @@ interface Bytes
      * @param int $position
      *
      * @return Bytes
-     * @throws OutOfBoundsException
-     * @throws OutOfRangeException
+     * @throws UnsupportedBytePosition
+     * @throws OutOfRangeBytePosition
      */
     public function sliceFrom(int $position): Bytes;
 
@@ -44,8 +44,8 @@ interface Bytes
      * @param int $length
      *
      * @return Bytes
-     * @throws OutOfBoundsException
-     * @throws OutOfRangeException
+     * @throws UnsupportedBytePosition
+     * @throws OutOfRangeBytePosition
      */
     public function sliceTo(int $length): Bytes;
 
@@ -54,8 +54,8 @@ interface Bytes
      *
      * @param int $position
      * @return string
-     * @throws OutOfBoundsException
-     * @throws OutOfRangeException
+     * @throws UnsupportedBytePosition
+     * @throws OutOfRangeBytePosition
      */
     public function peek(int $position): string;
 

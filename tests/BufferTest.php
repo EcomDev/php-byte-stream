@@ -46,7 +46,7 @@ class BufferTest extends TestCase
     /** @test */
     public function emptyBufferSlicingFromWithNegativePositionErrorsOut()
     {
-        $this->expectException(OutOfBoundsException::class);
+        $this->expectException(UnsupportedBytePosition::class);
 
         $this->factory->createBuffer()->sliceFrom(-1);
     }
@@ -54,7 +54,7 @@ class BufferTest extends TestCase
     /** @test */
     public function slicingEmptyBufferWithAnyPositivePositionErrorsOut()
     {
-        $this->expectException(OutOfRangeException::class);
+        $this->expectException(OutOfRangeBytePosition::class);
 
         $this->factory->createBuffer()->sliceFrom(0);
     }
@@ -63,7 +63,7 @@ class BufferTest extends TestCase
     /** @test */
     public function emptyBufferSlicingToWithNegativePositionErrorsOut()
     {
-        $this->expectException(OutOfBoundsException::class);
+        $this->expectException(UnsupportedBytePosition::class);
 
         $this->factory->createBuffer()->sliceTo(-1);
     }
@@ -71,7 +71,7 @@ class BufferTest extends TestCase
     /** @test */
     public function slicingEmptyBufferToAnyPositivePositionErrorsOut()
     {
-        $this->expectException(OutOfRangeException::class);
+        $this->expectException(OutOfRangeBytePosition::class);
 
         $this->factory->createBuffer()->sliceTo(1);
     }
@@ -88,7 +88,7 @@ class BufferTest extends TestCase
     /** @test */
     public function emptyBufferPeekWithNegativePositionErrorsOut()
     {
-        $this->expectException(OutOfBoundsException::class);
+        $this->expectException(UnsupportedBytePosition::class);
 
         $this->factory->createBuffer()->peek(-1);
     }
@@ -96,7 +96,7 @@ class BufferTest extends TestCase
     /** @test */
     public function peekEmptyBufferAtAnyPositionErrorsOut()
     {
-        $this->expectException(OutOfRangeException::class);
+        $this->expectException(OutOfRangeBytePosition::class);
 
         $this->factory->createBuffer()->peek(1);
     }

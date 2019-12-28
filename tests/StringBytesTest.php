@@ -28,7 +28,10 @@ class StringBytesTest extends TestCase
     /** @test */
     public function emptyBytesForEmptyString()
     {
-        $this->assertIterable([], $this->factory->createBytesFromString('')->bytes());
+        $this->assertIterable(
+            [],
+            $this->factory->createBytesFromString('')->bytes()
+        );
     }
 
     /** @test */
@@ -40,19 +43,28 @@ class StringBytesTest extends TestCase
     /** @test */
     public function iteratesOverByteStreamForSingleACharacter()
     {
-        $this->assertIterable(['a'], $this->factory->createBytesFromString('a')->bytes());
+        $this->assertIterable(
+            ['a'],
+            $this->factory->createBytesFromString('a')->bytes()
+        );
     }
 
     /** @test */
     public function returnsOriginalStringSize()
     {
-        $this->assertEquals(5, $this->factory->createBytesFromString('abcde')->size());
+        $this->assertEquals(
+            5,
+            $this->factory->createBytesFromString('abcde')->size()
+        );
     }
 
     /** @test */
     public function iteratesOverEveryByteInTheString()
     {
-        $this->assertIterable(['a', 'b', 'c', 'd', 'e', 'f', 'g'], $this->factory->createBytesFromString('abcdefg')->bytes());
+        $this->assertIterable(
+            ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+            $this->factory->createBytesFromString('abcdefg')->bytes()
+        );
     }
 
     /** @test */
@@ -98,8 +110,7 @@ class StringBytesTest extends TestCase
     /** @test */
     public function errorsOnOutOfBoundsFromSlice()
     {
-        $this->expectException(OutOfRangeException::class);
-        $this->expectExceptionMessage('Bytes are shorter then requested slice');
+        $this->expectException(OutOfRangeBytePosition::class);
 
         $this->factory->createBytesFromString('I am short string')
             ->sliceFrom(10)
@@ -139,8 +150,7 @@ class StringBytesTest extends TestCase
     /** @test */
     public function errorsOnOutOfBoundToSlice()
     {
-        $this->expectException(OutOfRangeException::class);
-        $this->expectExceptionMessage('Bytes are shorter then requested slice');
+        $this->expectException(OutOfRangeBytePosition::class);
 
         $this->factory->createBytesFromString('I am short string')
             ->sliceFrom(10)
@@ -161,8 +171,7 @@ class StringBytesTest extends TestCase
     /** @test */
     public function errorsOnOutOnNegativeFromSlice()
     {
-        $this->expectException(OutOfBoundsException::class);
-        $this->expectExceptionMessage('Slice can only be in positive range');
+        $this->expectException(UnsupportedBytePosition::class);
 
         $this->factory->createBytesFromString('I am short string')
             ->sliceFrom(-10);
@@ -171,8 +180,7 @@ class StringBytesTest extends TestCase
     /** @test */
     public function errorsOnOutOnNegativeToSlice()
     {
-        $this->expectException(OutOfBoundsException::class);
-        $this->expectExceptionMessage('Slice can only be in positive range');
+        $this->expectException(UnsupportedBytePosition::class);
 
         $this->factory->createBytesFromString('I am short string')
             ->sliceTo(-10);
@@ -225,8 +233,7 @@ class StringBytesTest extends TestCase
     /** @test */
     public function negativeOffsetErrorsDuringPeek()
     {
-        $this->expectException(OutOfBoundsException::class);
-        $this->expectExceptionMessage('Position should be always a positive integer');
+        $this->expectException(UnsupportedBytePosition::class);
 
         $this->factory->createBytesFromString('some-data')
             ->peek(-1);
@@ -235,8 +242,7 @@ class StringBytesTest extends TestCase
     /** @test */
     public function outOfBoundPeekOperationTriggersAnError()
     {
-        $this->expectException(OutOfRangeException::class);
-        $this->expectExceptionMessage('Requested position is not available in the bytes');
+        $this->expectException(OutOfRangeBytePosition::class);
 
         $this->factory->createBytesFromString('Data of 11b')->peek(11);
     }
@@ -259,8 +265,7 @@ class StringBytesTest extends TestCase
         $slice = $this->factory->createBytesFromString('I am short slice')->sliceTo(10);
         $slice->peek(9);
 
-        $this->expectException(OutOfRangeException::class);
-        $this->expectExceptionMessage('Requested position is not available in the bytes');
+        $this->expectException(OutOfRangeBytePosition::class);
 
         $slice->peek(10);
     }

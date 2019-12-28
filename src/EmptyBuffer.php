@@ -64,16 +64,16 @@ final class EmptyBuffer implements Buffer
     }
 
     /**
-     * Returns errors based on position supplied as an argument
+     * Throws error based on position supplied as an argument
      *
      * @param int $position
      */
     private function errorOnPositionAccess(int $position)
     {
         if ($position >=  0) {
-            throw OutOfRangeException::bytesAreTooShort();
+            throw OutOfRangeBytePosition::create();
         }
 
-        throw OutOfBoundsException::onlyInPositiveRange();
+        throw UnsupportedBytePosition::create();
     }
 }

@@ -91,11 +91,11 @@ final class StringBytes implements Bytes
         $limit += $offset;
 
         if ($offset < 0 || $limit < 0) {
-            throw OutOfBoundsException::onlyInPositiveRange();
+            throw UnsupportedBytePosition::create();
         }
 
         if ($limit > $this->size || $offset > $this->size) {
-            throw OutOfRangeException::bytesAreTooShort();
+            throw OutOfRangeBytePosition::create();
         }
 
         $slice = new self($this->bytes, $this->size);
@@ -121,13 +121,13 @@ final class StringBytes implements Bytes
     public function peek(int $position): string
     {
         if ($position < 0) {
-            throw OutOfBoundsException::positionShouldBeAlwaysPositive();
+            throw UnsupportedBytePosition::create();
         }
 
         $position += $this->offset;
 
         if ($position >= $this->limit) {
-            throw OutOfRangeException::requestedPositionNotAvailable();
+            throw OutOfRangeBytePosition::create();
         }
 
         return $this->bytes[$position];
